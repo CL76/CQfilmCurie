@@ -1,8 +1,9 @@
-pandas
+#pandas
 streamlit
-sklearn
-bokeh
-seaborn
-matplotlib
-plotly
-#tenacity
+#sklearn
+#bokeh
+#seaborn
+#matplotlib
+#plotly
+#tenacity 
+opencv-python
