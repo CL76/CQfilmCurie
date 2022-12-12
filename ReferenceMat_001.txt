@@ -1,0 +1,25 @@
+code;lot;datedemiseenroute;retourdesté;datereforme;datereception;dateCQ;remarque
+1;U06;14/05/2020;5;15/12/2020;datereception;datecq;sonde liée au bloc
+2;U06;14/05/2020;1;09/06/2020;datereception;datecq;le guide ne passe plus, pincement de la sonde
+3;U06;14/05/2020;6;15/12/2020;datereception;datecq;sonde pliee au bloc
+4;U06;27/05/2020;4;15/12/2020;datereception;datecq;sonde pliee au bloc
+5;U06;29/05/2020;2;01/07/2020;datereception;datecq;sonde pliee apres ablation du moule
+6;U06;29/05/2020;8;01/06/2021;datereception;datecq;
+7;V22-024;03/07/2020;3;15/12/2020;datereception;datecq;sonde pliee au bloc
+8;V22-022;03/07/2020;12;25/10/2021;datereception;datecq;sonde pliee au bloc 
+10;v22-025;21/12/2020;3;17/03/2021;datereception;datecq;sonde pliee apres ablation du moule
+11;v22-010;17/12/2020;2;17/03/2021;datereception;datecq;sonde pliee apres ablation du moule
+12;v27004 grosse ;17/12/2020;4;;datereception;datecq;
+13;v27-008;17/12/2020;8;;datereception;datecq;
+14;v 27-10 grosse ;17/12/2020;5;;datereception;datecq;
+15;v27-02 grosse ;17/12/2020;4;;datereception;datecq;
+16;v27-014;17/12/2020;2;?;datereception;datecq;
+17;v 27026 grosse ;17/03/2021;3;;datereception;datecq;
+18;V38;02/06/2021;7;;datereception;datecq;
+19;v38 grosse;19/07/2021;2;;datereception;datecq;
+20;V38;19/07/2021;1;?;datereception;datecq;
+21;V38 001;13/10/2021;1;?;datereception;datecq;
+22;V38 30;13/10/2021;3;;datereception;datecq;
+23;V38-15;28/10/2021;1;13/04/2022;datereception;datecq;abimée et pincée 
+24;V38-22;05/07/20221;1;;datereception;datecq;
+25;v38002;13/04/2022;4;15/06/2022;datereception;datecq;tordu par l equipe de sterilisation dans l attente de remboursement

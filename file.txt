@@ -1,0 +1,5 @@
+Soit 𝑓(𝑥) = 𝑥² + 3. Calculer 𝑓(0), 𝑓(−2) et 𝑓(4)
+Soit 𝑓(𝑥) = −5𝑥 − 3. Calculer 𝑓(0), 𝑓(−2) et 𝑓(4)
+Soit 𝑓(𝑥) = 2𝑥² − 3𝑥 + 6. Calculer 𝑓(0), 𝑓(−2) et 𝑓(4)
+Soit 𝑓(𝑥) = (𝑥 − 3)² + 2. Calculer 𝑓(0), 𝑓(−2) et 𝑓(4).
+Soit 𝑓(𝑥) = 3/(𝑥+5). Calculer 𝑓(1), 𝑓(−1) et 𝑓(2).
