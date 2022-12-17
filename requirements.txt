@@ -1,9 +1,3 @@
-#pandas
 streamlit
-#sklearn
-#bokeh
-#seaborn
-#matplotlib
-#plotly
-#tenacity 
-opencv-python
+cv2
+numpy
