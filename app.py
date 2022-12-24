@@ -14,7 +14,7 @@ with col1:               # To display the header text using css style
     st.markdown('<p class="font">Upload your photo here...</p>', unsafe_allow_html=True)
     
 with col2:               # To display brand logo
-    st.image(image,  width=150)
+#    st.image(image,  width=150)
 
 #Add a header and expander in side bar
 st.sidebar.markdown('<p class="font">My First Photo Converter App</p>', unsafe_allow_html=True)
