@@ -38,7 +38,7 @@ if uploaded_file is not None:
 
     with col2:
         st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
-        filter = st.sidebar.radio('Covert your photo to:', ['Original','Gray Image','Black and White', 'Pencil Sketch', 'Blur Effect'])
+        filter = st.sidebar.radio('Covert your photo to:', ['Original','Erode Image','Gray Image','Black and White', 'Pencil Sketch', 'Blur Effect'])
         if filter == 'Gray Image':
                 converted_img = np.array(image.convert('RGB'))
                 gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
