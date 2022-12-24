@@ -37,6 +37,7 @@ if uploaded_file is not None:
 
     with col2:
         st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
+        
 uploaded_file = st.file_uploader("", type=['jpg','png','jpeg'])
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
