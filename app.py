@@ -3,7 +3,7 @@ import streamlit as st
 import cv2
 import numpy as np
 
-image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
+#image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
 
 #Create two columns with different width
 col1, col2 = st.columns( [0.8, 0.2])
