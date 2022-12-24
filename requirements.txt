@@ -2,4 +2,3 @@ numpy
 altair
 pandas
 streamlit
-cv2
