@@ -1,3 +1,5 @@
+numpy
+altair
+pandas
 streamlit
 cv2
-# numpy
