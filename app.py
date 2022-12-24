@@ -1,6 +1,6 @@
 #Import libraries
 import streamlit as st
-import cv2
+#import cv2
 import numpy as np
 
 #image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
