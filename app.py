@@ -18,10 +18,10 @@ with col1:               # To display the header text using css style
 #    st.image(image,  width=150)
 
 #Add a header and expander in side bar
-st.sidebar.markdown('<p class="font"> Analyse de Films Permadoc - HDD - Baclesse App</p>', unsafe_allow_html=True)
+st.sidebar.markdown('<p class="font"> Analyse de Films Permadoc - HDD - Baclesse</p>', unsafe_allow_html=True)
 with st.sidebar.expander("About the App"):
      st.write("""
-        Use this simple app to convert your favorite photo to a pencil sketch, a grayscale image or an image with blurring effect.  \n  \nThis app was created by Sharone Li as a side project to learn Streamlit and computer vision. Hope you enjoy!
+        Charger la photo et blabla.  \n  \nCette app a été créée par Cédric LOISEAU - Décembre 2022
      """)
 #Add file uploader to allow users to upload photos
 uploaded_file = st.file_uploader("", type=['jpg','png','jpeg'])    
