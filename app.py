@@ -52,7 +52,7 @@ if uploaded_file is not None:
     
                 kernel = np.ones((5, 5), np.uint8) 
                 
-                gray_scale = cv2.erode(converted_img, cv2.COLOR_RGB2GRAY)
+                gray_scale = cv2.erode(converted_img, kernel,cv2.COLOR_RGB2GRAY)
                 st.image(gray_scale, width=300)        
        
         elif filter == 'Black and White':
