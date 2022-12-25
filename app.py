@@ -50,7 +50,7 @@ if uploaded_file is not None:
                 
 # Creating kernel 
     
-                kernel = np.ones((5, 5), np.uint8) *255
+                kernel = np.ones((10,10), np.uint8) *255
                 
                 gray_scale = cv2.erode(converted_img, kernel,cv2.COLOR_RGB2GRAY)
                 st.image(gray_scale, width=300)        
