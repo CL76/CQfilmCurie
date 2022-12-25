@@ -46,6 +46,12 @@ if uploaded_file is not None:
                 
         if filter == 'Erode Image':
                 converted_img = np.array(image.convert('RGB'))
+                
+                
+# Creating kernel 
+    
+                kernel = np.ones((5, 5), np.uint8) 
+                
                 gray_scale = cv2.erode(converted_img, cv2.COLOR_RGB2GRAY)
                 st.image(gray_scale, width=300)        
        
