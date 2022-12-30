@@ -1,5 +1,7 @@
 numpy
-#pandas
 streamlit
-#opencv-python
 opencv-python-headless
+PIL
+matplotlib
+scipy.signal
+sys
