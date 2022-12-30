@@ -1,7 +1,7 @@
 numpy
 streamlit
 opencv-python-headless
-PIL
+#PIL
 #matplotlib
-scipy.signal
-sys
+#scipy.signal
+#sys
