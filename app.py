@@ -4,6 +4,161 @@ import cv2
 import numpy as np
 from  PIL import Image, ImageEnhance
 
+
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+from matplotlib.pyplot import figure
+from scipy.signal import find_peaks,find_peaks_cwt
+import sys
+from numpy import NaN, Inf, arange, isscalar, asarray, array
+
+def show_image(image, title='Image', cmap_type='gray'):
+    plt.imshow(image, cmap=cmap_type)
+    plt.title(title)
+    plt.axis('off')
+    
+def peakdet(v, delta, x = None):
+    """
+    Converted from MATLAB script at http://billauer.co.il/peakdet.html
+    
+    Returns two arrays
+    
+    function [maxtab, mintab]=peakdet(v, delta, x)
+    %PEAKDET Detect peaks in a vector
+    %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
+    %        maxima and minima ("peaks") in the vector V.
+    %        MAXTAB and MINTAB consists of two columns. Column 1
+    %        contains indices in V, and column 2 the found values.
+    %      
+    %        With [MAXTAB, MINTAB] = PEAKDET(V, DELTA, X) the indices
+    %        in MAXTAB and MINTAB are replaced with the corresponding
+    %        X-values.
+    %
+    %        A point is considered a maximum peak if it has the maximal
+    %        value, and was preceded (to the left) by a value lower by
+    %        DELTA.
+    
+    % Eli Billauer, 3.4.05 (Explicitly not copyrighted).
+    % This function is released to the public domain; Any use is allowed.
+    
+    """
+    maxtab = []
+    mintab = []
+       
+    if x is None:
+        x = arange(len(v))
+    
+    v = asarray(v)
+    
+    if len(v) != len(x):
+        sys.exit('Input vectors v and x must have same length')
+    
+    if not isscalar(delta):
+        sys.exit('Input argument delta must be a scalar')
+    
+    if delta <= 0:
+        sys.exit('Input argument delta must be positive')
+    
+    mn, mx = Inf, -Inf
+    mnpos, mxpos = NaN, NaN
+    
+    lookformax = True
+    
+    for i in arange(len(v)):
+        this = v[i]
+        if this > mx:
+            mx = this
+            mxpos = x[i]
+        if this < mn:
+            mn = this
+            mnpos = x[i]
+        
+        if lookformax:
+            if this < mx-delta:
+                maxtab.append((mxpos, mx))
+                mn = this
+                mnpos = x[i]
+                lookformax = False
+        else:
+            if this > mn+delta:
+                mintab.append((mnpos, mn))
+                mx = this
+                mxpos = x[i]
+                lookformax = True
+
+    return array(maxtab), array(mintab)
+
+if __name__=="__main__":
+    from matplotlib.pyplot import plot, scatter, show
+    series = [0,0,0,2,0,0,0,-2,0,0,0,2,0,0,0,-2,0]
+    maxtab, mintab = peakdet(series,.3)
+    plot(series)
+    scatter(array(maxtab)[:,0], array(maxtab)[:,1], color='blue')
+    scatter(array(mintab)[:,0], array(mintab)[:,1], color='red')
+    show()
+    
+    
+    
+def show_image_cadre(image, debut_y=100, fin=200, droite=200, gauche=100, title='', cmap_type='gray',alpha = 0.2):
+    figure(figsize=(15, 15))
+    plt.imshow(image, cmap=cmap_type)
+    # Get the current reference
+    ax = plt.gca()
+    # Create a Rectangle patch
+    rect = Rectangle((gauche,debut),image.shape[0]-droite-gauche,fin-debut,linewidth=1,edgecolor='r',alpha = alpha,facecolor='orchid')
+    # Add the patch to the Axes
+    ax.add_patch(rect)
+    plt.title(title)
+    plt.axis('off')
+    
+def detect_peak(s_profil,value_peak_to_detect=1500,max_peak_to_remove=8000):
+  #value_peak_to_detect = 1500
+  maxtab, mintab = peakdet(s_profil,value_peak_to_detect)
+  a_max = array(maxtab)[:,0]
+  b_max = array(maxtab)[:,1]
+
+  a_min = array(mintab)[:,0].tolist()
+  b_min = array(mintab)[:,1].tolist()
+
+
+  #plot(s)
+  #scatter(a, b, color='blue')
+  #show()
+  #max_peak_to_remove=8000
+
+  c_max = np.where( b_max < max_peak_to_remove)[0].tolist()
+  aa_max=a_max.tolist()
+  bb_max=b_max.tolist()
+  d_max=[]
+  e_max=[]
+  for i in c_max:
+    #print(i)
+    d_max.append(aa_max[i])
+    e_max.append(bb_max[i])
+
+  plot(s_profil)
+  scatter(d_max,e_max, color='lightskyblue')
+  scatter(a_min,b_min, color='plum')
+  show()
+
+  liste_peak_max=[d_max,e_max]
+  liste_peak_min = [a_min,b_min]
+
+  return liste_peak_max,liste_peak_min
+
+
+
+def rotate_image(image, angle):
+  image_center = tuple(np.array(image.shape[1::-1]) / 2)
+  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
+  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+  return result
+
+
+
+
+
 #image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
 
 #Create two columns with different width
@@ -34,7 +189,14 @@ if uploaded_file is not None:
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(image,width=300)  
-
+        slider_crop_xmin = st.sidebar.slider('x_min boite', 0, image.shape[1]-1, 80, step=1)
+        slider_crop_xmax = st.sidebar.slider('x_max boite', 0, image.shape[1]-1-slider_crop_xmin, 3800, step=1)
+        slider_crop_ymin = st.sidebar.slider('x_min boite', 0, image.shape[0]-1, 80, step=1)
+        slider_crop_ymax = st.sidebar.slider('x_max boite', 0, image.shape[0]-1-slider_crop_ymin, 3800, step=1)        
+        
+        FilmCQ_crop = FilmCQ[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
+        st.image(FilmCQ_crop,width=300) 
+       # show_image(FilmCQ_crop, 'Original RGB image');
 
     with col2:
         st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
