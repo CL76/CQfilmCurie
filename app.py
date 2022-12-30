@@ -2,16 +2,16 @@
 import streamlit as st
 import cv2
 import numpy as np
-from  PIL import Image, ImageEnhance
+#from  PIL import Image, ImageEnhance
 
 
 
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-from matplotlib.pyplot import figure
-from scipy.signal import find_peaks,find_peaks_cwt
-import sys
-from numpy import NaN, Inf, arange, isscalar, asarray, array
+#import matplotlib.pyplot as plt
+#from matplotlib.patches import Rectangle
+#from matplotlib.pyplot import figure
+#from scipy.signal import find_peaks,find_peaks_cwt
+#import sys
+#from numpy import NaN, Inf, arange, isscalar, asarray, array
 
 def show_image(image, title='Image', cmap_type='gray'):
     plt.imshow(image, cmap=cmap_type)
