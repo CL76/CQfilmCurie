@@ -33,6 +33,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     pix = np.array(image)
     st.write(pix)
+    st.write(pix.shape)
     col1, col2 = st.columns( [0.5, 0.5])
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
