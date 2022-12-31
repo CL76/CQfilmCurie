@@ -1,4 +1,5 @@
 #Import libraries.  https://towardsdatascience.com/create-a-photo-converter-app-using-streamlit-surprisingly-easy-and-fun-db291b5010c6
+#https://blog.streamlit.io/make-your-st-pyplot-interactive/
 import streamlit as st
 import cv2
 import numpy as np
@@ -28,19 +29,25 @@ import matplotlib.pyplot as plt
 #Add file uploader to allow users to upload photos
 uploaded_file = st.file_uploader("", type=['jpg','png','jpeg'])    
 
-#Add 'before' and 'after' columns
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     pix = np.array(image)
     #st.write(pix)
     st.write(pix.shape)
-    col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
+    
     
     slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
         #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
     slider_crop_xmax = st.slider('taille x de la boite', 0, pix.shape[1]-1, 200, step=1)
     slider_crop_ymin = st.slider('Origine y de la boite', 0, pix.shape[0]-1, 80, step=1)
     slider_crop_ymax = st.slider('taille y de la boite', 0, pix.shape[0]-1, 200, step=1)  
+
+tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
+
+with tab1:
+    st.header("A cat")
+    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+    col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
     
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
@@ -49,7 +56,24 @@ if uploaded_file is not None:
       
         
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
-        st.image(FilmCQ_crop,width=150) 
+        st.image(FilmCQ_crop,width=150)  
+    
+    
+
+with tab2:
+   st.header("A dog")
+   st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+with tab3:
+   st.header("An owl")
+   st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+
+
+
+#Add 'before' and 'after' columns
+
+    
+
         
         
     with col3:
