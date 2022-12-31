@@ -2,6 +2,6 @@ numpy
 streamlit
 opencv-python-headless
 pillow
-#matplotlib
-#scipy.signal
-#sys
+matplotlib
+scipy.signal
+sys
