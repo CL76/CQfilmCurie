@@ -36,11 +36,7 @@ if uploaded_file is not None:
     st.write(pix.shape)
     
     
-    slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
-        #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
-    slider_crop_xmax = st.slider('taille x de la boite', 0, pix.shape[1]-1, 200, step=1)
-    slider_crop_ymin = st.slider('Origine y de la boite', 0, pix.shape[0]-1, 80, step=1)
-    slider_crop_ymax = st.slider('taille y de la boite', 0, pix.shape[0]-1, 200, step=1)  
+
 
 tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
 
@@ -48,7 +44,11 @@ with tab1:
     st.header("A cat")
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
     col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
-    
+    slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
+        #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
+    slider_crop_xmax = st.slider('taille x de la boite', 0, pix.shape[1]-1, 200, step=1)
+    slider_crop_ymin = st.slider('Origine y de la boite', 0, pix.shape[0]-1, 80, step=1)
+    slider_crop_ymax = st.slider('taille y de la boite', 0, pix.shape[0]-1, 200, step=1)  
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(pix,width=150)  
