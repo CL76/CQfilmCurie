@@ -3,7 +3,7 @@ import streamlit as st
 import cv2
 import numpy as np
 from  PIL import Image, ImageEnhance
-
+import matplotlib.pyplot as plt
 
 
 #image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
