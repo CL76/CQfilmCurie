@@ -47,7 +47,7 @@ if uploaded_file is not None:
         
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
         st.image(FilmCQ_crop,width=300) 
-        show_image(FilmCQ_crop, 'Original RGB image');
+       # show_image(FilmCQ_crop, 'Original RGB image');
 
     #with col2:
     #    st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
