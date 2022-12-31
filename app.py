@@ -49,7 +49,7 @@ if uploaded_file is not None:
       
         
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
-        st.image(FilmCQ_crop,width=300) 
+        st.image(FilmCQ_crop,width=150) 
        # show_image(FilmCQ_crop, 'Original RGB image');
 
     #with col2:
