@@ -40,13 +40,13 @@ if uploaded_file is not None:
         st.image(pix,width=150)  
         slider_crop_xmin = st.sidebar.slider('x_min boite', 0, pix.shape[1]-1, 80, step=1)
         #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
-        #slider_crop_xmax = st.sidebar.slider('x_max boite', 0, image.shape[1]-1-slider_crop_xmin, 3800, step=1)
-        #slider_crop_ymin = st.sidebar.slider('x_min boite', 0, image.shape[0]-1, 80, step=1)
-        #slider_crop_ymax = st.sidebar.slider('x_max boite', 0, image.shape[0]-1-slider_crop_ymin, 3800, step=1)        
+        slider_crop_xmax = st.sidebar.slider('x_max boite', 0, pix.shape[1]-1-slider_crop_xmin, 3800, step=1)
+        slider_crop_ymin = st.sidebar.slider('x_min boite', 0, pix.shape[0]-1, 80, step=1)
+        slider_crop_ymax = st.sidebar.slider('x_max boite', 0, pix.shape[0]-1-slider_crop_ymin, 3800, step=1)        
         
-        #FilmCQ_crop = FilmCQ[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
-        #st.image(FilmCQ_crop,width=300) 
-        #show_image(FilmCQ_crop, 'Original RGB image');
+        FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
+        st.image(FilmCQ_crop,width=300) 
+        show_image(FilmCQ_crop, 'Original RGB image');
 
     with col2:
         st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
