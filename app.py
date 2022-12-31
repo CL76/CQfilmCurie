@@ -61,12 +61,16 @@ with tab1:
     
 
 with tab2:
-   st.header("A dog")
-   st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+    st.image(FilmCQ_crop,width=150) 
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+    fig = plt.figure() 
+    plt.plot([1, 2, 3, 4, 5]) 
+    st.pyplot(fig)
 
 with tab3:
-   st.header("An owl")
-   st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    st.header("An owl")
+    st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
 
 
@@ -76,13 +80,10 @@ with tab3:
 
         
         
-    with col3:
+
         
         #create your figure and get the figure object returned
-        fig = plt.figure() 
-        plt.plot([1, 2, 3, 4, 5]) 
 
-        st.pyplot(fig)
        # show_image(FilmCQ_crop, 'Original RGB image');
 
     #with col2:
