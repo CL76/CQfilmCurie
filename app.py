@@ -50,6 +50,15 @@ if uploaded_file is not None:
         
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
         st.image(FilmCQ_crop,width=150) 
+        
+        
+    with col3:
+        
+        #create your figure and get the figure object returned
+        fig = plt.figure() 
+        plt.plot([1, 2, 3, 4, 5]) 
+
+        st.pyplot(fig)
        # show_image(FilmCQ_crop, 'Original RGB image');
 
     #with col2:
