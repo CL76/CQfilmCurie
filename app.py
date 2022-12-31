@@ -55,7 +55,7 @@ if uploaded_file is not None:
     #    if filter == 'Gray Image':
     #            converted_img = np.array(image.convert('RGB'))
     #            gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
-    "            st.image(gray_scale, width=150)
+    #            st.image(gray_scale, width=150)
                 
 #        if filter == 'Erode Image':
 #                converted_img = np.array(image.convert('RGB'))
