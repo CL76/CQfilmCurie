@@ -38,11 +38,11 @@ if uploaded_file is not None:
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(pix,width=150)  
-        slider_crop_xmin = st.sidebar.slider('x_min boite', 0, pix.shape[1]-1, 80, step=1)
+        slider_crop_xmin = st.sidebar.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
         #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
-        slider_crop_xmax = st.sidebar.slider('x_max boite', 0, pix.shape[1]-1-slider_crop_xmin, 3800, step=1)
-        slider_crop_ymin = st.sidebar.slider('x_min boite', 0, pix.shape[0]-1, 80, step=1)
-        slider_crop_ymax = st.sidebar.slider('x_max boite', 0, pix.shape[0]-1-slider_crop_ymin, 3800, step=1)        
+        slider_crop_xmax = st.sidebar.slider('taille x de la boite', 0, pix.shape[1]-1-slider_crop_xmin, 0, step=1)
+        slider_crop_ymin = st.sidebar.slider('Origine y de la boite', 0, pix.shape[0]-1, 80, step=1)
+        slider_crop_ymax = st.sidebar.slider('taille y de la boite', 0, pix.shape[0]-1-slider_crop_ymin, 0, step=1)        
         
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
         st.image(FilmCQ_crop,width=300) 
