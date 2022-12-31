@@ -31,7 +31,7 @@ uploaded_file = st.file_uploader("", type=['jpg','png','jpeg'])
 #Add 'before' and 'after' columns
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    pix = numpy.array(image)
+    pix = np.array(image)
     st.write(pix)
     col1, col2 = st.columns( [0.5, 0.5])
     with col1:
