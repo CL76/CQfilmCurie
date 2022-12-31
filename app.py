@@ -34,10 +34,11 @@ if uploaded_file is not None:
     pix = np.array(image)
     #st.write(pix)
     st.write(pix.shape)
-    col1, col2 = st.columns( [0.5, 0.5])
+    col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(pix,width=150)  
+    with col2:
         slider_crop_xmin = st.sidebar.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
         #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
         slider_crop_xmax = st.sidebar.slider('taille x de la boite', 0, pix.shape[1]-1-slider_crop_xmin, 0, step=1)
@@ -48,13 +49,13 @@ if uploaded_file is not None:
         st.image(FilmCQ_crop,width=300) 
         show_image(FilmCQ_crop, 'Original RGB image');
 
-    with col2:
-        st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
-        filter = st.sidebar.radio('Covert your photo to:', ['Original','Erode Image','Gray Image','Black and White', 'Pencil Sketch', 'Blur Effect'])
-        if filter == 'Gray Image':
-                converted_img = np.array(image.convert('RGB'))
-                gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
-                st.image(gray_scale, width=150)
+    #with col2:
+    #    st.markdown('<p style="text-align: center;">After</p>',unsafe_allow_html=True)
+    #    filter = st.sidebar.radio('Covert your photo to:', ['Original','Erode Image','Gray Image','Black and White', 'Pencil Sketch', 'Blur Effect'])
+    #    if filter == 'Gray Image':
+    #            converted_img = np.array(image.convert('RGB'))
+    #            gray_scale = cv2.cvtColor(converted_img, cv2.COLOR_RGB2GRAY)
+    "            st.image(gray_scale, width=150)
                 
 #        if filter == 'Erode Image':
 #                converted_img = np.array(image.convert('RGB'))
