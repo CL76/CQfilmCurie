@@ -36,7 +36,8 @@ if uploaded_file is not None:
     with col1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(image,width=150)  
-        slider_crop_xmin = st.sidebar.slider('x_min boite', 0, image.shape[1]-1, 80, step=1)
+        #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, image.shape[1]-1, 80, step=1)
+        slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
         #slider_crop_xmax = st.sidebar.slider('x_max boite', 0, image.shape[1]-1-slider_crop_xmin, 3800, step=1)
         #slider_crop_ymin = st.sidebar.slider('x_min boite', 0, image.shape[0]-1, 80, step=1)
         #slider_crop_ymax = st.sidebar.slider('x_max boite', 0, image.shape[0]-1-slider_crop_ymin, 3800, step=1)        
