@@ -45,7 +45,7 @@ with tab1:
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
     col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
     
-    slider_crop_xmin = st.number_input("    ")
+    #slider_crop_xmin = st.number_input("    ")
     #slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
         #slider_crop_xmin = st.sidebar.slider('x_min boite', 0, 500, 80, step=1)
     slider_crop_xmax = st.slider('taille x de la boite', 0, pix.shape[1]-1, 200, step=1)
