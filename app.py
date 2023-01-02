@@ -7,6 +7,118 @@ from  PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 
 
+def show_image(image, title='Image', cmap_type='gray'):
+    plt.imshow(image, cmap=cmap_type)
+    plt.title(title)
+    plt.axis('off')
+    
+def peakdet(v, delta, x = None):
+    """
+    Converted from MATLAB script at http://billauer.co.il/peakdet.html
+    
+    Returns two arrays
+    
+    function [maxtab, mintab]=peakdet(v, delta, x)
+    %PEAKDET Detect peaks in a vector
+    %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
+    %        maxima and minima ("peaks") in the vector V.
+    %        MAXTAB and MINTAB consists of two columns. Column 1
+    %        contains indices in V, and column 2 the found values.
+    %      
+    %        With [MAXTAB, MINTAB] = PEAKDET(V, DELTA, X) the indices
+    %        in MAXTAB and MINTAB are replaced with the corresponding
+    %        X-values.
+    %
+    %        A point is considered a maximum peak if it has the maximal
+    %        value, and was preceded (to the left) by a value lower by
+    %        DELTA.
+    
+    % Eli Billauer, 3.4.05 (Explicitly not copyrighted).
+    % This function is released to the public domain; Any use is allowed.
+    
+    """
+    maxtab = []
+    mintab = []
+       
+    if x is None:
+        x = arange(len(v))
+    
+    v = asarray(v)
+    
+    if len(v) != len(x):
+        sys.exit('Input vectors v and x must have same length')
+    
+    if not isscalar(delta):
+        sys.exit('Input argument delta must be a scalar')
+    
+    if delta <= 0:
+        sys.exit('Input argument delta must be positive')
+    
+    mn, mx = Inf, -Inf
+    mnpos, mxpos = NaN, NaN
+    
+    lookformax = True
+    
+    for i in arange(len(v)):
+        this = v[i]
+        if this > mx:
+            mx = this
+            mxpos = x[i]
+        if this < mn:
+            mn = this
+            mnpos = x[i]
+        
+        if lookformax:
+            if this < mx-delta:
+                maxtab.append((mxpos, mx))
+                mn = this
+                mnpos = x[i]
+                lookformax = False
+        else:
+            if this > mn+delta:
+                mintab.append((mnpos, mn))
+                mx = this
+                mxpos = x[i]
+                lookformax = True
+
+    return array(maxtab), array(mintab)
+
+if __name__=="__main__":
+    from matplotlib.pyplot import plot, scatter, show
+    series = [0,0,0,2,0,0,0,-2,0,0,0,2,0,0,0,-2,0]
+    maxtab, mintab = peakdet(series,.3)
+    plot(series)
+    scatter(array(maxtab)[:,0], array(maxtab)[:,1], color='blue')
+    scatter(array(mintab)[:,0], array(mintab)[:,1], color='red')
+    show()
+    
+    
+def erode_NG_sketch_image(image,kernel_erode_x=10,kernel_erode_y=10,kernel_gaussianblur=101):
+  kernel = np.ones((kernel_erode_x,kernel_erode_y), np.uint8) *255
+  image_erode = cv2.erode(image, kernel)
+  image_NG = cv2.cvtColor(image_erode, cv2.COLOR_RGB2GRAY)
+  inv_gray = 255 - image_NG
+  plt.imshow(inv_gray, )
+  print(inv_gray.shape)
+  blur_image = cv2.GaussianBlur(inv_gray, (kernel_gaussianblur,kernel_gaussianblur), 0, 0)
+  plt.imshow(blur_image,)
+  sketch = cv2.divide(gray_scale, 255 - blur_image, scale=256)
+  return sketch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #image = Image.open(r'...\Insights_Bees_logo.png') #Brand logo image (optional)
 
 #Create two columns with different width
@@ -45,10 +157,10 @@ with tab1:
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
     col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
     
-    slider_crop_xmin = st.number_input("Origine x de la boite",0,10,step=1)
-    slider_crop_xmax = st.number_input('taille x de la boite', 0, 200, 200, step=1)
-    slider_crop_ymin = st.number_input('Origine y de la boite', 0, 200, 80, step=1)
-    slider_crop_ymax = st.number_input('taille y de la boite', 0, 200, 200, step=1)    
+    slider_crop_xmin = st.number_input("Origine x de la boite",0,pix.shape[1],0,step=1)
+    slider_crop_xmax = st.number_input('taille x de la boite', 0, pix.shape[1], 500, step=1)
+    slider_crop_ymin = st.number_input('Origine y de la boite', 0, pix.shape[0], 0, step=1)
+    slider_crop_ymax = st.number_input('taille y de la boite', 0, pix.shape[0], 500, step=1)    
     
     
     #slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
@@ -60,11 +172,9 @@ with tab1:
         st.markdown('<p style="text-align: center;">Before</p>',unsafe_allow_html=True)
         st.image(pix,width=150)  
     with col2:
-      
-        
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
         st.image(FilmCQ_crop,width=150)  
-    
+    with col3:
     
 
 with tab2:
