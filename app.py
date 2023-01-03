@@ -235,19 +235,19 @@ with tab1:
     with col2:
         FilmCQ_crop = pix[slider_crop_xmin:slider_crop_xmax, slider_crop_ymin:slider_crop_ymax]
         st.image(FilmCQ_crop,width=150)  
-    with col3:
+    #with col3:
     
 
 with tab2:
     st.image(FilmCQ_crop,width=150) 
-    st.header("A dog")
+    st.header("image reduite")
     #st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
     fig = plt.figure() 
     plt.plot([1, 2, 3, 4, 5]) 
     st.pyplot(fig)
 
 with tab3:
-    st.header("An owl")
+    st.header("i")
     #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
     Origine_x_rect =400
     Origine_y_rect =200
