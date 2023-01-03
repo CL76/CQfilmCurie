@@ -15,9 +15,7 @@ def show_image(image, title='Image', cmap_type='gray'):
 def peakdet(v, delta, x = None):
     """
     Converted from MATLAB script at http://billauer.co.il/peakdet.html
-    
     Returns two arrays
-    
     function [maxtab, mintab]=peakdet(v, delta, x)
     %PEAKDET Detect peaks in a vector
     %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
@@ -35,30 +33,21 @@ def peakdet(v, delta, x = None):
     
     % Eli Billauer, 3.4.05 (Explicitly not copyrighted).
     % This function is released to the public domain; Any use is allowed.
-    
     """
     maxtab = []
-    mintab = []
-       
+    mintab = [] 
     if x is None:
-        x = arange(len(v))
-    
+        x = arange(len(v))    
     v = asarray(v)
-    
     if len(v) != len(x):
         sys.exit('Input vectors v and x must have same length')
-    
     if not isscalar(delta):
         sys.exit('Input argument delta must be a scalar')
-    
     if delta <= 0:
-        sys.exit('Input argument delta must be positive')
-    
+        sys.exit('Input argument delta must be positive')   
     mn, mx = Inf, -Inf
     mnpos, mxpos = NaN, NaN
-    
     lookformax = True
-    
     for i in arange(len(v)):
         this = v[i]
         if this > mx:
@@ -80,30 +69,29 @@ def peakdet(v, delta, x = None):
                 mx = this
                 mxpos = x[i]
                 lookformax = True
-
     return array(maxtab), array(mintab)
 
-if __name__=="__main__":
-    from matplotlib.pyplot import plot, scatter, show
-    series = [0,0,0,2,0,0,0,-2,0,0,0,2,0,0,0,-2,0]
-    maxtab, mintab = peakdet(series,.3)
-    plot(series)
-    scatter(array(maxtab)[:,0], array(maxtab)[:,1], color='blue')
-    scatter(array(mintab)[:,0], array(mintab)[:,1], color='red')
-    show()
+    if __name__=="__main__":
+        from matplotlib.pyplot import plot, scatter, show
+        series = [0,0,0,2,0,0,0,-2,0,0,0,2,0,0,0,-2,0]
+        maxtab, mintab = peakdet(series,.3)
+        plot(series)
+        scatter(array(maxtab)[:,0], array(maxtab)[:,1], color='blue')
+        scatter(array(mintab)[:,0], array(mintab)[:,1], color='red')
+        show()
     
     
 def erode_NG_sketch_image(image,kernel_erode_x=10,kernel_erode_y=10,kernel_gaussianblur=101):
-  kernel = np.ones((kernel_erode_x,kernel_erode_y), np.uint8) *255
-  image_erode = cv2.erode(image, kernel)
-  image_NG = cv2.cvtColor(image_erode, cv2.COLOR_RGB2GRAY)
-  inv_gray = 255 - image_NG
-  plt.imshow(inv_gray, )
-  print(inv_gray.shape)
-  blur_image = cv2.GaussianBlur(inv_gray, (kernel_gaussianblur,kernel_gaussianblur), 0, 0)
-  plt.imshow(blur_image,)
-  sketch = cv2.divide(gray_scale, 255 - blur_image, scale=256)
-  return sketch
+    kernel = np.ones((kernel_erode_x,kernel_erode_y), np.uint8) *255
+    image_erode = cv2.erode(image, kernel)
+    image_NG = cv2.cvtColor(image_erode, cv2.COLOR_RGB2GRAY)
+    inv_gray = 255 - image_NG
+    plt.imshow(inv_gray, )
+    print(inv_gray.shape)
+    blur_image = cv2.GaussianBlur(inv_gray, (kernel_gaussianblur,kernel_gaussianblur), 0, 0)
+    plt.imshow(blur_image,)
+    sketch = cv2.divide(gray_scale, 255 - blur_image, scale=256)
+    return sketch
 
 
 
@@ -125,59 +113,66 @@ def show_image_cadre(image, debut_y=100, fin=200, droite=200, gauche=100, title=
 
     
     
-  def detect_peak(s_profil,value_peak_to_detect=1500,max_peak_to_remove=8000):
-  #value_peak_to_detect = 1500
-  maxtab, mintab = peakdet(s_profil,value_peak_to_detect)
-  a_max = array(maxtab)[:,0]
-  b_max = array(maxtab)[:,1]
-
-  a_min = array(mintab)[:,0].tolist()
-  b_min = array(mintab)[:,1].tolist()
-
-
-  #plot(s)
-  #scatter(a, b, color='blue')
-  #show()
-  #max_peak_to_remove=8000
-
-  c_max = np.where( b_max < max_peak_to_remove)[0].tolist()
-  aa_max=a_max.tolist()
-  bb_max=b_max.tolist()
-  d_max=[]
-  e_max=[]
-  for i in c_max:
+def detect_peak(s_profil,value_peak_to_detect=1500,max_peak_to_remove=8000):
+    #value_peak_to_detect = 1500
+    maxtab, mintab = peakdet(s_profil,value_peak_to_detect)
+    a_max = array(maxtab)[:,0]
+    b_max = array(maxtab)[:,1]
+    a_min = array(mintab)[:,0].tolist()
+    b_min = array(mintab)[:,1].tolist()
+    #plot(s)
+    #scatter(a, b, color='blue')
+    #show()
+    #max_peak_to_remove=8000
+    c_max = np.where( b_max < max_peak_to_remove)[0].tolist()
+    aa_max=a_max.tolist()
+    bb_max=b_max.tolist()
+    d_max=[]
+    e_max=[]
+    for i in c_max:
     #print(i)
-    d_max.append(aa_max[i])
-    e_max.append(bb_max[i])
-
-  plot(s_profil)
-  scatter(d_max,e_max, color='lightskyblue')
-  scatter(a_min,b_min, color='plum')
-  show()
-
-  liste_peak_max=[d_max,e_max]
-  liste_peak_min = [a_min,b_min]
-
-  return liste_peak_max,liste_peak_min
+        d_max.append(aa_max[i])
+        e_max.append(bb_max[i])
+    plot(s_profil)
+    scatter(d_max,e_max, color='lightskyblue')
+    scatter(a_min,b_min, color='plum')
+    show()
+    liste_peak_max=[d_max,e_max]
+    liste_peak_min = [a_min,b_min]
+    return liste_peak_max,liste_peak_min
 
 
 
 def rotate_image(image, angle):
-  image_center = tuple(np.array(image.shape[1::-1]) / 2)
-  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
-  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
-  return result    
+    #from scipy import ndimage
+    #image_center = tuple(np.array(image.shape[1::-1]) / 2)
+    #rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
+    #result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+    #return result    
+
+    #rotation angle in degree
+    imagerotate = ndimage.rotate(image, angle)
+    show_image(imagerotate, 'Original RGB image');
+    figure(figsize=(15, 15))
+    plt.imshow(imagerotate, cmap='gray',)
+    plt.axhline(y = imagerotate.shape[0]/2-100, color = 'orange', linestyle = '-')
+    plt.axvline(x = 700, color = 'orange', linestyle = '-')
+    plt.title("")
+    plt.axis('off');    
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+def show_image_cadre_2(image, Origine_x_rect =400, Origine_y_rect =200,taille_x_rect = 500, taille_y_rect = 600, title='', cmap_type='gray',alpha = 0.2):
+    figure(figsize=(15, 15))
+    plt.imshow(image, cmap=cmap_type)
+    # Get the current reference
+    ax = plt.gca()
+    # Create a Rectangle patch
+    rect = Rectangle((Origine_x_rect,Origine_y_rect),taille_x_rect,taille_y_rect,linewidth=1,edgecolor='r',alpha = alpha,facecolor='orchid')
+    # Add the patch to the Axes
+    ax.add_patch(rect)
+    plt.title(title)
+    plt.axis('off')    
     
 
 
@@ -220,13 +215,13 @@ tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
 
 with tab1:
     st.header("A cat")
-    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+    #st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
     col1, col2, col3 = st.columns( [0.4, 0.3,0.3])
     
     slider_crop_xmin = st.number_input("Origine x de la boite",0,pix.shape[1],0,step=1)
-    slider_crop_xmax = st.number_input('taille x de la boite', 0, pix.shape[1], 500, step=1)
+    slider_crop_xmax = st.number_input('taille x de la boite', 0, pix.shape[1], pix.shape[1], step=1)
     slider_crop_ymin = st.number_input('Origine y de la boite', 0, pix.shape[0], 0, step=1)
-    slider_crop_ymax = st.number_input('taille y de la boite', 0, pix.shape[0], 500, step=1)    
+    slider_crop_ymax = st.number_input('taille y de la boite', 0, pix.shape[0], pix.shape[0], step=1)    
     
     
     #slider_crop_xmin = st.slider('Origine x de la boite', 0, pix.shape[1]-1, 80, step=1)
@@ -246,16 +241,22 @@ with tab1:
 with tab2:
     st.image(FilmCQ_crop,width=150) 
     st.header("A dog")
-    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+    #st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
     fig = plt.figure() 
     plt.plot([1, 2, 3, 4, 5]) 
     st.pyplot(fig)
 
 with tab3:
     st.header("An owl")
-    st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
-    st.balloons()
-
+    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+    Origine_x_rect =400
+    Origine_y_rect =200
+    #taille_x_rect = 100
+    taille_y_rect = 3400
+    taille_x_rect = st.number_input('taille x de la boite', 0, imagerotate.shape[1], 100, step=1)
+    show_image_cadre_2(imagerotate,Origine_x_rect, Origine_y_rect,taille_x_rect, taille_y_rect ,alpha = 0.4 );
+    #st.balloons()
+    
 
 #Add 'before' and 'after' columns
 
