@@ -109,10 +109,76 @@ def erode_NG_sketch_image(image,kernel_erode_x=10,kernel_erode_y=10,kernel_gauss
 
 
 
+def show_image_cadre(image, debut_y=100, fin=200, droite=200, gauche=100, title='', cmap_type='gray',alpha = 0.2):
+    figure(figsize=(15, 15))
+    plt.imshow(image, cmap=cmap_type)
+    # Get the current reference
+    ax = plt.gca()
+    # Create a Rectangle patch
+    rect = Rectangle((gauche,debut),image.shape[0]-droite-gauche,fin-debut,linewidth=1,edgecolor='r',alpha = alpha,facecolor='orchid')
+    # Add the patch to the Axes
+    ax.add_patch(rect)
+    plt.title(title)
+    plt.axis('off')
 
 
 
+    
+    
+  def detect_peak(s_profil,value_peak_to_detect=1500,max_peak_to_remove=8000):
+  #value_peak_to_detect = 1500
+  maxtab, mintab = peakdet(s_profil,value_peak_to_detect)
+  a_max = array(maxtab)[:,0]
+  b_max = array(maxtab)[:,1]
 
+  a_min = array(mintab)[:,0].tolist()
+  b_min = array(mintab)[:,1].tolist()
+
+
+  #plot(s)
+  #scatter(a, b, color='blue')
+  #show()
+  #max_peak_to_remove=8000
+
+  c_max = np.where( b_max < max_peak_to_remove)[0].tolist()
+  aa_max=a_max.tolist()
+  bb_max=b_max.tolist()
+  d_max=[]
+  e_max=[]
+  for i in c_max:
+    #print(i)
+    d_max.append(aa_max[i])
+    e_max.append(bb_max[i])
+
+  plot(s_profil)
+  scatter(d_max,e_max, color='lightskyblue')
+  scatter(a_min,b_min, color='plum')
+  show()
+
+  liste_peak_max=[d_max,e_max]
+  liste_peak_min = [a_min,b_min]
+
+  return liste_peak_max,liste_peak_min
+
+
+
+def rotate_image(image, angle):
+  image_center = tuple(np.array(image.shape[1::-1]) / 2)
+  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
+  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+  return result    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
